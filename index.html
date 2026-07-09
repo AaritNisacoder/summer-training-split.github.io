@@ -4,29 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Summer Training Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1115;
-    --card: #171a21;
-    --border: #2a2e38;
-    --border-strong: #3a4050;
-    --text: #eef0f4;
-    --text-secondary: #9aa1b0;
-    --text-muted: #6b7280;
-    --accent: #ff6b4a;
-    --accent-dim: #3a2620;
-    --green: #4ade80;
-    --green-dim: #16281c;
-    --blue: #60a5fa;
-    --purple: #a78bfa;
-    --purple-dim: #241f38;
-    --radius: 10px;
+    --bg: #0a0a0d;
+    --bg-texture: #0d0d11;
+    --card: #16171c;
+    --card-raised: #1c1e24;
+    --border: #2b2d34;
+    --border-strong: #3f4249;
+    --text: #f2f3f5;
+    --text-secondary: #9a9ea8;
+    --text-muted: #64686f;
+    --accent: #2f8fff;
+    --accent-dark: #1f6fd6;
+    --accent-dim: #10233d;
+    --danger: #ff3b30;
+    --danger-dim: #2e1210;
+    --blue: #35d6c4;
+    --purple: #b98bff;
+    --purple-dim: #201a2e;
+    --green: #7fe84a;
+    --green-dim: #16220d;
+    --radius: 4px;
+    --radius-lg: 8px;
+    --font-display: 'Bebas Neue', 'Barlow Condensed', sans-serif;
+    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-exercise: 'Barlow Semi Condensed', sans-serif;
+    --font-body: 'Barlow', -apple-system, sans-serif;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(47,143,255,0.07), transparent),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 12px);
     color: var(--text);
     padding-bottom: 4rem;
   }
@@ -36,21 +52,30 @@
     margin: 0 auto;
   }
   .header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: var(--text);
+    line-height: 0.95;
+  }
+  .header h1 span {
+    color: var(--accent);
   }
   .header p {
     font-size: 14px;
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.5;
+    max-width: 56ch;
   }
   .day-tabs {
     display: flex;
-    gap: 6px;
+    gap: 14px;
     overflow-x: auto;
-    padding: 0 1.25rem 1rem;
+    padding: 0.25rem 1.25rem 1.25rem;
     max-width: 760px;
     margin: 0 auto;
     -webkit-overflow-scrolling: touch;
@@ -58,21 +83,50 @@
   .day-tabs::-webkit-scrollbar { display: none; }
   .day-tab {
     flex: 0 0 auto;
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-    padding: 10px 14px;
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.15s ease;
   }
-  .day-tab.active {
-    background: var(--accent-dim);
+  .day-tab-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--border-strong);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: all 0.18s ease;
+  }
+  .day-tab-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    transition: color 0.18s ease;
+  }
+  .day-tab.active .day-tab-circle {
+    background: var(--accent);
     border-color: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .day-tab.active .day-tab-label {
     color: var(--accent);
+  }
+  .day-tab:hover .day-tab-circle {
+    border-color: var(--accent);
   }
   main {
     max-width: 760px;
@@ -82,14 +136,18 @@
   .day-banner {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.25rem;
     margin-bottom: 1.25rem;
   }
   .day-banner h2 {
-    font-size: 18px;
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     margin: 0 0 4px;
-    font-weight: 600;
   }
   .day-banner p {
     font-size: 13px;
@@ -97,29 +155,104 @@
     margin: 0;
     line-height: 1.5;
   }
-  .progress-bar-track {
-    height: 6px;
-    background: var(--border);
-    border-radius: 3px;
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-top: 12px;
+  }
+  .progress-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--border);
+    border-radius: var(--radius);
     overflow: hidden;
   }
   .progress-bar-fill {
     height: 100%;
     background: var(--accent);
-    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(47,143,255,0.5);
+    border-radius: var(--radius);
     transition: width 0.3s ease;
     width: 0%;
+  }
+  .progress-label {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .sub-progress-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .sub-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sub-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .sub-progress-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+  .sub-progress-count {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .sub-progress-track {
+    height: 5px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .sub-progress-fill {
+    height: 100%;
+    border-radius: var(--radius);
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .sub-warmup { background: var(--purple); }
+  .sub-exercise { background: var(--accent); }
+  .sub-cooldown { background: var(--blue); }
+  .checklist-item .exercise-row {
+    align-items: center;
+  }
+  .checklist-text {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .checklist-item.done .checklist-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
   }
   .section {
     margin-bottom: 1.5rem;
   }
   .section-title {
-    font-size: 12px;
+    font-family: var(--font-heading);
+    font-size: 15px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
     margin: 0 0 10px;
     display: flex;
     align-items: center;
@@ -142,14 +275,15 @@
   .exercise {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     padding: 12px 14px;
     margin-bottom: 8px;
     transition: all 0.15s ease;
   }
   .exercise.done {
     background: var(--green-dim);
-    border-color: #1f4a2e;
+    border-color: var(--green);
+    opacity: 0.75;
   }
   .exercise-row {
     display: flex;
@@ -158,9 +292,9 @@
   }
   .checkbox {
     flex: 0 0 auto;
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius);
     border: 2px solid var(--border-strong);
     margin-top: 2px;
     cursor: pointer;
@@ -173,10 +307,11 @@
   .checkbox.checked {
     background: var(--green);
     border-color: var(--green);
+    box-shadow: 0 0 10px rgba(127,232,74,0.4);
   }
   .checkbox svg {
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
     display: none;
   }
   .checkbox.checked svg { display: block; }
@@ -189,18 +324,21 @@
     flex-wrap: wrap;
   }
   .exercise-name {
-    font-size: 14.5px;
-    font-weight: 500;
-    line-height: 1.4;
+    font-family: var(--font-exercise);
+    font-size: 16.5px;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    line-height: 1.35;
   }
   .exercise.done .exercise-name {
     text-decoration: line-through;
     color: var(--text-muted);
   }
   .exercise-sets {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
     white-space: nowrap;
   }
   .exercise-meta {
@@ -212,16 +350,20 @@
   .tag {
     font-size: 11px;
     padding: 3px 8px;
-    border-radius: 20px;
-    font-weight: 500;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
   .tag.muscle {
-    background: rgba(96,165,250,0.12);
+    background: rgba(62,198,255,0.12);
     color: var(--blue);
+    border: 1px solid rgba(62,198,255,0.25);
   }
   .tag.rest {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.05);
     color: var(--text-secondary);
+    border: 1px solid var(--border);
   }
   .exercise-note {
     font-size: 12.5px;
@@ -229,9 +371,9 @@
     margin-top: 8px;
     line-height: 1.5;
     background: rgba(255,255,255,0.02);
-    border-left: 2px solid var(--border-strong);
+    border-left: 3px solid var(--accent-dark);
     padding: 6px 10px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
   }
   .exercise-actions {
     margin-top: 8px;
@@ -243,15 +385,17 @@
     align-items: center;
     gap: 5px;
     font-size: 12px;
-    font-weight: 500;
-    color: var(--blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #ffffff;
     text-decoration: none;
-    background: rgba(96,165,250,0.1);
-    padding: 5px 10px;
-    border-radius: 6px;
-    transition: background 0.15s ease;
+    background: var(--accent);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    transition: all 0.15s ease;
   }
-  .video-link:hover { background: rgba(96,165,250,0.18); }
+  .video-link:hover { background: var(--accent-dark); }
   .video-link svg { width: 13px; height: 13px; }
   .warmup-list {
     list-style: none;
@@ -261,20 +405,21 @@
   .warmup-list li {
     font-size: 13.5px;
     color: var(--text-secondary);
-    padding: 8px 0;
+    padding: 9px 0;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
   .warmup-list li:last-child { border-bottom: none; }
   .warmup-list li::before {
     content: "";
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--text-muted);
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
     flex: 0 0 auto;
+    transform: rotate(45deg);
   }
   .rest-day {
     text-align: center;
@@ -282,8 +427,11 @@
     color: var(--text-secondary);
   }
   .rest-day h2 {
+    font-family: var(--font-display);
     color: var(--text);
-    font-size: 20px;
+    font-size: 36px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     margin-bottom: 8px;
   }
   .footer-note {
@@ -301,18 +449,141 @@
     background: transparent;
     border: 1px solid var(--border-strong);
     color: var(--text-secondary);
-    font-size: 12px;
-    padding: 6px 12px;
-    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 7px 14px;
+    border-radius: var(--radius);
     cursor: pointer;
     margin-top: 4px;
+    transition: all 0.15s ease;
+  }
+  .reset-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .stopwatch-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(47,143,255,0.45), 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 100;
+    transition: transform 0.15s ease;
+  }
+  .stopwatch-fab:hover { transform: scale(1.06); }
+  .stopwatch-fab svg { width: 26px; height: 26px; }
+  .stopwatch-panel {
+    position: fixed;
+    bottom: 88px;
+    right: 20px;
+    width: 220px;
+    background: var(--card-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    z-index: 101;
+    display: none;
+  }
+  .stopwatch-panel.open { display: block; }
+  .stopwatch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .stopwatch-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+  }
+  .stopwatch-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+  }
+  .stopwatch-close:hover { color: var(--text); }
+  .stopwatch-display {
+    font-family: var(--font-display);
+    font-size: 42px;
+    text-align: center;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+  }
+  .stopwatch-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .stopwatch-btn {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 8px 0;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .stopwatch-btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+  .stopwatch-btn-primary.is-running {
+    background: var(--danger);
+    border-color: var(--danger);
+  }
+  .stopwatch-presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .preset-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 0;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .preset-btn:hover, .preset-btn.active-preset {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Summer Training Split</h1>
+  <h1><span>Summer</span> Training Split</h1>
   <p>Push / pull / legs, updated with muscle targets, rest periods, and hip/glute work for knee and hip health. Tap exercises to check them off. Checkmarks reset on reload — built for tracking one session at a time.</p>
 </div>
 
@@ -321,6 +592,28 @@
 <main id="main"></main>
 
 <div class="footer-note" id="footerNote"></div>
+
+<div id="stopwatchFab" class="stopwatch-fab">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5"></path><path d="M9 2h6"></path><path d="M12 2v3"></path></svg>
+</div>
+
+<div id="stopwatchPanel" class="stopwatch-panel">
+  <div class="stopwatch-header">
+    <span class="stopwatch-title">Rest Timer</span>
+    <button id="stopwatchClose" class="stopwatch-close">&times;</button>
+  </div>
+  <div id="stopwatchDisplay" class="stopwatch-display">00:00</div>
+  <div class="stopwatch-controls">
+    <button id="stopwatchStartPause" class="stopwatch-btn stopwatch-btn-primary">Start</button>
+    <button id="stopwatchReset" class="stopwatch-btn">Reset</button>
+  </div>
+  <div class="stopwatch-presets">
+    <button class="preset-btn" data-secs="60">60s</button>
+    <button class="preset-btn" data-secs="90">90s</button>
+    <button class="preset-btn" data-secs="120">2m</button>
+    <button class="preset-btn" data-secs="180">3m</button>
+  </div>
+</div>
 
 <script>
 function ytSearch(q) {
@@ -571,11 +864,30 @@ function exerciseKey(dayKey, sectionIdx, itemIdx) {
 }
 
 function checkIconSvg() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="#0f1115" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 }
 
 function videoIconSvg() {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>';
+}
+
+function checkableListKey(dayKey, listType, idx) {
+  return dayKey + "|" + listType + "|" + idx;
+}
+
+function renderCheckableList(dayKey, listType, items) {
+  let html = '';
+  items.forEach((item, idx) => {
+    const key = checkableListKey(dayKey, listType, idx);
+    const done = !!state.checked[key];
+    html += '<div class="exercise checklist-item ' + (done ? "done" : "") + '">';
+    html += '<div class="exercise-row">';
+    html += '<div class="checkbox ' + (done ? "checked" : "") + '" data-key="' + key + '">' + checkIconSvg() + '</div>';
+    html += '<div class="exercise-body"><span class="checklist-text">' + item + '</span></div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  return html;
 }
 
 function toggleExercise(key) {
@@ -601,9 +913,26 @@ function resetToday() {
       section.items.forEach((item, iIdx) => {
         delete state.checked[exerciseKey(day.key, sIdx, iIdx)];
       });
+    } else if (section.type === "list") {
+      section.items.forEach((item, iIdx) => {
+        delete state.checked[checkableListKey(day.key, "warmup", iIdx)];
+      });
     }
   });
+  if (day.cooldown) {
+    day.cooldown.forEach((item, idx) => {
+      delete state.checked[checkableListKey(day.key, "cooldown", idx)];
+    });
+  }
   renderMain();
+}
+
+function shortDayCode(tabLabel) {
+  if (tabLabel === "Sun") return "SUN";
+  return tabLabel
+    .split("/")
+    .map(part => part.slice(0, 1).toUpperCase())
+    .join("/");
 }
 
 function renderTabs() {
@@ -612,8 +941,18 @@ function renderTabs() {
   days.forEach(day => {
     const btn = document.createElement("button");
     btn.className = "day-tab" + (day.key === state.activeDay ? " active" : "");
-    btn.textContent = day.tabLabel;
     btn.onclick = () => setActiveDay(day.key);
+
+    const circle = document.createElement("span");
+    circle.className = "day-tab-circle";
+    circle.textContent = shortDayCode(day.tabLabel);
+
+    const label = document.createElement("span");
+    label.className = "day-tab-label";
+    label.textContent = day.tabLabel;
+
+    btn.appendChild(circle);
+    btn.appendChild(label);
     tabsEl.appendChild(btn);
   });
 }
@@ -628,8 +967,28 @@ function renderMain() {
       '<div class="day-banner">' +
         '<div class="rest-day">' +
           '<h2>Rest day</h2>' +
-          '<p>No lifting today. Light stretching or walking is fine if you want to move, but full recovery is what makes the rest of the week work.</p>' +
+          '<p>No lifting today. Here\'s what actually helps on a day off, based on the research.</p>' +
         '</div>' +
+      '</div>' +
+      '<div class="section">' +
+        '<div class="section-title">Move a little, don\'t sit completely still</div>' +
+        '<div class="exercise"><span class="checklist-text">A 20-30 minute walk, easy bike ride, or casual swim is genuinely better than doing nothing. A review of 471 competitive athletes across 26 studies found short active recovery sessions of about 6-10 minutes had consistently positive effects, and this isn\'t about making today better, it\'s about making tomorrow\'s session better. Keep it easy, roughly 60% of your max heart rate, not a real workout.</span></div>' +
+      '</div>' +
+      '<div class="section">' +
+        '<div class="section-title">Good day for mobility work</div>' +
+        '<div class="exercise"><span class="checklist-text">Since you\'re not freshly fatigued from today\'s training, this is actually one of the better days to work on tight spots, hip flexors, hamstrings, shoulders, whatever felt stiff during the week. Worth knowing: research hasn\'t shown a clear performance benefit from stretching or foam rolling specifically, but people reliably feel less sore and stiff afterward, so there\'s no harm in it, just don\'t expect it to replace the other things on this list.</span></div>' +
+      '</div>' +
+      '<div class="section">' +
+        '<div class="section-title">Sleep matters more today than almost anything else</div>' +
+        '<div class="exercise"><span class="checklist-text">Sleep raises growth hormone levels that trigger muscle repair. One study found lifters who added protein before bed saw measurably greater muscle and strength gains over a training block than those who didn\'t, even on an already high-protein diet. If you\'re behind on sleep from a busy training week, Sunday is the day to catch up, not stay up late just because there\'s no workout tomorrow morning.</span></div>' +
+      '</div>' +
+      '<div class="section">' +
+        '<div class="section-title">A bit of protein before bed is a real, if modest, lever</div>' +
+        '<div class="exercise"><span class="checklist-text">Research supports roughly 20-40 grams of protein (a glass of milk, Greek yogurt, a protein shake) about 30 minutes before sleep, shown to measurably increase muscle protein synthesis overnight. This matters most close to a training stimulus, so it\'s more useful the night before or after a hard session than on a day with zero training at all.</span></div>' +
+      '</div>' +
+      '<div class="section">' +
+        '<div class="section-title">Rest days help your head, not just your body</div>' +
+        '<div class="exercise"><span class="checklist-text">A survey of over 600 competitive athletes found general fatigue was the single biggest reason people took rest days in the first place, and skipping rest entirely during hard training blocks is linked to overreaching and burnout. A full week of 6-day training, even a well-designed one, needs somewhere to reset, that\'s the actual job this day is doing for both of you.</span></div>' +
       '</div>';
     footer.innerHTML = "";
     return;
@@ -637,15 +996,35 @@ function renderMain() {
 
   let totalExercises = 0;
   let doneExercises = 0;
+  let totalWarmup = 0;
+  let doneWarmup = 0;
+  let totalCooldown = 0;
+  let doneCooldown = 0;
+
   day.sections.forEach((section, sIdx) => {
     if (section.type === "exercises") {
       section.items.forEach((item, iIdx) => {
         totalExercises++;
         if (state.checked[exerciseKey(day.key, sIdx, iIdx)]) doneExercises++;
       });
+    } else if (section.type === "list") {
+      section.items.forEach((item, iIdx) => {
+        totalWarmup++;
+        if (state.checked[checkableListKey(day.key, "warmup", iIdx)]) doneWarmup++;
+      });
     }
   });
+
+  if (day.cooldown) {
+    day.cooldown.forEach((item, idx) => {
+      totalCooldown++;
+      if (state.checked[checkableListKey(day.key, "cooldown", idx)]) doneCooldown++;
+    });
+  }
+
   const pct = totalExercises ? Math.round((doneExercises / totalExercises) * 100) : 0;
+  const pctWarmup = totalWarmup ? Math.round((doneWarmup / totalWarmup) * 100) : 0;
+  const pctCooldown = totalCooldown ? Math.round((doneCooldown / totalCooldown) * 100) : 0;
 
   let html = '';
   html += '<div class="day-banner">';
@@ -654,7 +1033,12 @@ function renderMain() {
     html += '<p style="margin-bottom:4px; font-weight:600; color:var(--accent);">Estimated time: ' + day.duration + ' (including warm-up and cooldown)</p>';
   }
   html += '<p>' + day.subtitle + '</p>';
-  html += '<div class="progress-bar-track"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div>';
+  html += '<div class="progress-row"><div class="progress-bar-track"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div><span class="progress-label">' + pct + '% done</span></div>';
+  html += '<div class="sub-progress-grid">';
+  html += '<div class="sub-progress"><div class="sub-progress-header"><span class="sub-progress-label">Warm-up</span><span class="sub-progress-count">' + doneWarmup + ' of ' + totalWarmup + '</span></div><div class="sub-progress-track"><div class="sub-progress-fill sub-warmup" style="width:' + pctWarmup + '%"></div></div></div>';
+  html += '<div class="sub-progress"><div class="sub-progress-header"><span class="sub-progress-label">Exercises</span><span class="sub-progress-count">' + doneExercises + ' of ' + totalExercises + '</span></div><div class="sub-progress-track"><div class="sub-progress-fill sub-exercise" style="width:' + pct + '%"></div></div></div>';
+  html += '<div class="sub-progress"><div class="sub-progress-header"><span class="sub-progress-label">Cooldown</span><span class="sub-progress-count">' + doneCooldown + ' of ' + totalCooldown + '</span></div><div class="sub-progress-track"><div class="sub-progress-fill sub-cooldown" style="width:' + pctCooldown + '%"></div></div></div>';
+  html += '</div>';
   html += '</div>';
 
   day.sections.forEach((section, sIdx) => {
@@ -667,11 +1051,7 @@ function renderMain() {
     html += '<div class="section-title">' + section.title + badgeHtml + '</div>';
 
     if (section.type === "list") {
-      html += '<div class="exercise"><ul class="warmup-list">';
-      section.items.forEach(item => {
-        html += '<li>' + item + '</li>';
-      });
-      html += '</ul></div>';
+      html += renderCheckableList(day.key, "warmup", section.items);
     } else {
       section.items.forEach((item, iIdx) => {
         const key = exerciseKey(day.key, sIdx, iIdx);
@@ -704,12 +1084,8 @@ function renderMain() {
 
   if (day.cooldown && day.cooldown.length) {
     html += '<div class="section">';
-    html += '<div class="section-title">Cooldown<span class="badge new">do last</span></div>';
-    html += '<div class="exercise"><ul class="warmup-list">';
-    day.cooldown.forEach(item => {
-      html += '<li>' + item + '</li>';
-    });
-    html += '</ul></div>';
+    html += '<div class="section-title">Cooldown</div>';
+    html += renderCheckableList(day.key, "cooldown", day.cooldown);
     html += '<div class="exercise-note" style="margin-top:-4px;">Worth knowing: rigorous research on post-workout stretching for reducing next-day soreness is actually mixed, a solid meta-analysis found no real difference vs. just resting. This cooldown still helps with blood flow, flexibility, and easing your body out of training mode, just don\'t expect it to erase soreness entirely. Some soreness after a new or updated routine is a completely normal training response.</div>';
     if (day.recoveryNote) {
       html += '<div class="exercise-note" style="margin-top:8px;">' + day.recoveryNote + '</div>';
@@ -734,6 +1110,110 @@ function renderMain() {
 
 renderTabs();
 renderMain();
+
+// Stopwatch / rest timer
+const stopwatch = {
+  running: false,
+  mode: "up", // "up" counts up from 0, "down" counts down from a preset
+  elapsedMs: 0,
+  targetMs: 0,
+  lastTick: null,
+  intervalId: null
+};
+
+function formatTime(ms) {
+  const totalSec = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+}
+
+function updateStopwatchDisplay() {
+  const display = document.getElementById("stopwatchDisplay");
+  if (stopwatch.mode === "down") {
+    const remaining = stopwatch.targetMs - stopwatch.elapsedMs;
+    display.textContent = formatTime(remaining);
+    if (remaining <= 0 && stopwatch.running) {
+      stopStopwatch();
+      display.textContent = "00:00";
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    }
+  } else {
+    display.textContent = formatTime(stopwatch.elapsedMs);
+  }
+}
+
+function tickStopwatch() {
+  const now = Date.now();
+  stopwatch.elapsedMs += now - stopwatch.lastTick;
+  stopwatch.lastTick = now;
+  updateStopwatchDisplay();
+}
+
+function startStopwatch() {
+  if (stopwatch.running) return;
+  stopwatch.running = true;
+  stopwatch.lastTick = Date.now();
+  stopwatch.intervalId = setInterval(tickStopwatch, 250);
+  const btn = document.getElementById("stopwatchStartPause");
+  btn.textContent = "Pause";
+  btn.classList.add("is-running");
+}
+
+function pauseStopwatch() {
+  stopwatch.running = false;
+  if (stopwatch.intervalId) clearInterval(stopwatch.intervalId);
+  const btn = document.getElementById("stopwatchStartPause");
+  btn.textContent = "Start";
+  btn.classList.remove("is-running");
+}
+
+function stopStopwatch() {
+  pauseStopwatch();
+}
+
+function resetStopwatch() {
+  pauseStopwatch();
+  stopwatch.elapsedMs = 0;
+  stopwatch.mode = "up";
+  stopwatch.targetMs = 0;
+  document.querySelectorAll(".preset-btn").forEach(b => b.classList.remove("active-preset"));
+  updateStopwatchDisplay();
+}
+
+document.getElementById("stopwatchFab").addEventListener("click", () => {
+  document.getElementById("stopwatchPanel").classList.toggle("open");
+});
+
+document.getElementById("stopwatchClose").addEventListener("click", () => {
+  document.getElementById("stopwatchPanel").classList.remove("open");
+});
+
+document.getElementById("stopwatchStartPause").addEventListener("click", () => {
+  if (stopwatch.running) {
+    pauseStopwatch();
+  } else {
+    startStopwatch();
+  }
+});
+
+document.getElementById("stopwatchReset").addEventListener("click", resetStopwatch);
+
+document.querySelectorAll(".preset-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    pauseStopwatch();
+    const secs = parseInt(btn.getAttribute("data-secs"), 10);
+    stopwatch.mode = "down";
+    stopwatch.targetMs = secs * 1000;
+    stopwatch.elapsedMs = 0;
+    document.querySelectorAll(".preset-btn").forEach(b => b.classList.remove("active-preset"));
+    btn.classList.add("active-preset");
+    updateStopwatchDisplay();
+    startStopwatch();
+  });
+});
+
+updateStopwatchDisplay();
 </script>
 
 </body>
