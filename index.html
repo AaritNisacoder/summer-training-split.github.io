@@ -138,8 +138,8 @@
     border: 1px solid var(--border);
     border-left: 4px solid var(--accent);
     border-radius: var(--radius-lg);
-    padding: 1.1rem 1.25rem;
-    margin-bottom: 1.25rem;
+    padding: 1.35rem 1.5rem;
+    margin-bottom: 1.75rem;
   }
   .day-banner h2 {
     font-family: var(--font-heading);
@@ -244,7 +244,7 @@
     color: var(--text-muted);
   }
   .section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   .section-title {
     font-family: var(--font-heading);
@@ -253,7 +253,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-secondary);
-    margin: 0 0 10px;
+    margin: 0 0 14px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -276,8 +276,8 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 12px 14px;
-    margin-bottom: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
     transition: all 0.15s ease;
   }
   .exercise.done {
@@ -288,12 +288,12 @@
   .exercise-row {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
   }
   .checkbox {
     flex: 0 0 auto;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: var(--radius);
     border: 2px solid var(--border-strong);
     margin-top: 2px;
@@ -466,10 +466,10 @@
   }
   .stopwatch-fab {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 56px;
-    height: 56px;
+    bottom: 24px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: var(--accent);
     color: #ffffff;
@@ -482,16 +482,17 @@
     transition: transform 0.15s ease;
   }
   .stopwatch-fab:hover { transform: scale(1.06); }
-  .stopwatch-fab svg { width: 26px; height: 26px; }
+  .stopwatch-fab svg { width: 30px; height: 30px; }
   .stopwatch-panel {
     position: fixed;
-    bottom: 88px;
-    right: 20px;
-    width: 220px;
+    bottom: 100px;
+    right: 24px;
+    width: 320px;
+    max-width: calc(100vw - 32px);
     background: var(--card-raised);
-    border: 1px solid var(--border-strong);
+    border: 2px solid var(--border-strong);
     border-radius: var(--radius-lg);
-    padding: 14px;
+    padding: 22px;
     box-shadow: 0 8px 28px rgba(0,0,0,0.5);
     z-index: 101;
     display: none;
@@ -501,11 +502,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
   }
   .stopwatch-title {
     font-family: var(--font-heading);
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -515,36 +516,36 @@
     background: none;
     border: none;
     color: var(--text-muted);
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1;
     cursor: pointer;
-    padding: 0 4px;
+    padding: 0 6px;
   }
   .stopwatch-close:hover { color: var(--text); }
   .stopwatch-display {
     font-family: var(--font-display);
-    font-size: 42px;
+    font-size: 64px;
     text-align: center;
     color: var(--accent);
     letter-spacing: 0.03em;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
   }
   .stopwatch-controls {
     display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-bottom: 18px;
   }
   .stopwatch-btn {
     flex: 1;
     background: var(--card);
-    border: 1px solid var(--border-strong);
+    border: 2px solid var(--border-strong);
     color: var(--text-secondary);
     font-family: var(--font-heading);
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    padding: 8px 0;
+    padding: 14px 0;
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -561,15 +562,15 @@
   .stopwatch-presets {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 8px;
   }
   .preset-btn {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     color: var(--text-secondary);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
-    padding: 6px 0;
+    padding: 12px 0;
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -677,7 +678,7 @@ const days = [
         type: "exercises",
         items: [
           { name: "Push-up finisher", sets: "2 sets to failure", rest: "60-90 sec", muscles: "Chest, triceps, core", note: "Your only to-failure push-up work. The rest of your push-up progress comes from daily skill practice, see note below the tracker.", video: "push up" },
-          { name: "Incline cable flyes (every other session)", sets: "2x12-15", rest: "60 sec", muscles: "Upper chest (stretch focus)", note: "Added per your call. Cables keep tension on the upper chest through the stretched position better than dumbbells, good as a finisher since you're already fatigued from pressing. Alternate which Mon/Thu session you do this on so you're not adding it every single time.", video: "incline cable fly" }
+          { name: "Incline dumbbell flyes (every other session)", sets: "2x12-15", rest: "60 sec", muscles: "Upper chest (stretch focus)", note: "Swapped from incline cable flyes since 425 doesn't have that machine. Dumbbells actually give a deeper stretch at the bottom of the movement than cables, the trade-off is you lose the constant tension cables provide, but for a finisher exercise like this that's a minor difference. Set the bench to a lower incline, roughly 30 degrees, for the best upper-chest emphasis. Alternate which Mon/Thu session you do this on so you're not adding it every single time.", video: "incline dumbbell fly" }
         ]
       }
     ],
@@ -856,7 +857,8 @@ const days = [
 
 const state = {
   activeDay: days[0].key,
-  checked: {}
+  checked: {},
+  confettiFired: {}
 };
 
 function exerciseKey(dayKey, sectionIdx, itemIdx) {
@@ -1026,6 +1028,15 @@ function renderMain() {
   const pctWarmup = totalWarmup ? Math.round((doneWarmup / totalWarmup) * 100) : 0;
   const pctCooldown = totalCooldown ? Math.round((doneCooldown / totalCooldown) * 100) : 0;
 
+  const allComplete = totalExercises > 0 && totalWarmup > 0 && totalCooldown > 0 &&
+    pct === 100 && pctWarmup === 100 && pctCooldown === 100;
+  if (allComplete && !state.confettiFired[day.key]) {
+    state.confettiFired[day.key] = true;
+    setTimeout(() => fireConfetti(), 50);
+  } else if (!allComplete) {
+    state.confettiFired[day.key] = false;
+  }
+
   let html = '';
   html += '<div class="day-banner">';
   html += '<h2>' + day.fullLabel + '</h2>';
@@ -1106,6 +1117,76 @@ function renderMain() {
     '<button class="reset-btn" id="resetBtn">Reset today\'s checkmarks</button>';
 
   document.getElementById("resetBtn").addEventListener("click", resetToday);
+}
+
+function fireConfetti() {
+  const canvas = document.createElement("canvas");
+  canvas.style.position = "fixed";
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+  canvas.style.width = "100vw";
+  canvas.style.height = "100vh";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "9999";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+
+  const colors = ["#2f8fff", "#7fe84a", "#ffffff", "#b98bff", "#3ec6ff"];
+  const particleCount = 140;
+  const particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() - 0.5) * 120,
+      y: canvas.height * 0.35 + (Math.random() - 0.5) * 60,
+      vx: (Math.random() - 0.5) * 14,
+      vy: Math.random() * -14 - 4,
+      size: Math.random() * 7 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      rotationSpeed: (Math.random() - 0.5) * 14,
+      shape: Math.random() > 0.5 ? "rect" : "circle"
+    });
+  }
+
+  const gravity = 0.4;
+  const drag = 0.99;
+  let frame = 0;
+  const maxFrames = 130;
+
+  function animate() {
+    frame++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.vx *= drag;
+      p.vy = p.vy * drag + gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.rotationSpeed;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = frame > maxFrames - 30 ? Math.max(0, (maxFrames - frame) / 30) : 1;
+      if (p.shape === "rect") {
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+
+    if (frame < maxFrames) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.remove();
+    }
+  }
+  requestAnimationFrame(animate);
 }
 
 renderTabs();
